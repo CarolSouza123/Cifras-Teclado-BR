@@ -151,6 +151,7 @@ const FeatureList = ({ items }: { items: readonly FeatureItem[] }) => <ul classN
 function PitchSection({ index }: { index: number }) {
   const block = pageContent.about[index]
   if (!block) return null
+  if ('highlights' in block && block.highlights) return <section className="section"><div className="container"><div className="download-card"><h2>{block.title}</h2>{block.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}<ul className="highlight-row">{block.highlights.map(item => <li key={item}><Check aria-hidden="true" />{item}</li>)}</ul><Button onClick={() => document.getElementById('ofertas')?.scrollIntoView({ behavior: 'smooth' })}>{block.ctaLabel}</Button></div></div></section>
   return <section className="section"><div className="container guarantee"><div><h2>{block.title}</h2>{block.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div></div></section>
 }
 

@@ -24,11 +24,13 @@ export const pageContent = {
       ],
     },
     {
-      title: '+ 100 Cifras para baixar!',
+      title: '+2000 Cifras para baixar!',
       paragraphs: [
         'Esqueça aquelas cifras bagunçadas da internet cheias de propagandas. Nosso material é limpo, organizado e feito para você tocar sem travar.',
         'Basta pegar seu instrumento, abrir a Coleção Suprema e começar a tocar.',
       ],
+      highlights: ['Material limpo e organizado', 'Sem propagandas', 'Pronto para imprimir'],
+      ctaLabel: 'Quero baixar agora',
     },
   ],
   sampleSection: {
