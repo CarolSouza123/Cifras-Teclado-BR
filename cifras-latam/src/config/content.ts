@@ -7,8 +7,8 @@ export const pageContent = {
     text: '⚡ ATENCIÓN: De $27,00 por solo $4,90 ASEGURANDO DENTRO DE LOS PRÓXIMOS MINUTOS ⚡',
   },
   hero: {
-    image: '',
-    imageAlt: 'Imagem da Hero',
+    image: '/images/colecao-suprema-hero.webp',
+    imageAlt: 'Coleção Suprema de Cifras Gospel: coleção completa e bônus',
     headline: 'Coleção Suprema com mais de 100 cifras simplificadas de louvores',
     body: 'Chega de dificuldades para tocar na igreja, nos cultos ou em casa. Um método simples para cristãos que querem começar a tocar louvores diferentes em alguns dias, mesmo que achem que não tem talento.',
     ctaLabel: 'Quero os louvores agora',
