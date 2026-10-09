@@ -9,14 +9,14 @@ export const pageContent = {
   hero: {
     image: '',
     imageAlt: 'Imagem da Hero',
-    headline: 'Nunca mais se sinta inútil no louvor: Aprenda a tocar mais de 300 músicas gospel no violão, com cifras simplificadas para iniciantes.',
+    headline: 'Coleção Suprema com mais de 100 cifras simplificadas de louvores',
     body: 'Chega de dificuldades para tocar na igreja, nos cultos ou em casa. Um método simples para cristãos que querem começar a tocar louvores diferentes em alguns dias, mesmo que achem que não tem talento.',
     ctaLabel: 'Quero os louvores agora',
     securityImage: '/images/selos-seguranca-compra.svg',
     securityImageAlt: 'Selos de compra segura, satisfação garantida e privacidade protegida',
   },
   results: {
-    title: 'Imagine poder lembrar de um louvor, abrir a Colección Suprema de Cifras Gospel e começar a tocar. Veja o que os cristãos dizem',
+    title: 'Imagine poder lembrar de um louvor, abrir a Coleção Suprema de Cifras Gospel e começar a tocar. Veja o que outros cristãos dizem',
     items: Array.from({ length: 6 }, (_, index) => ({
       src: '',
       alt: `Placeholder: Depoimento ${String(index + 1).padStart(2, '0')}`,
