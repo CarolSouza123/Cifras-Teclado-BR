@@ -4,7 +4,7 @@ export type ProductItem = MediaItem & { eyebrow: string; title: string; descript
 export const pageContent = {
   urgencyBar: {
     enabled: true,
-    text: '⚡ ATENCIÓN: De $27,00 por solo $4,90 ASEGURANDO DENTRO DE LOS PRÓXIMOS MINUTOS ⚡',
+    text: '⚡ ATENÇÃO: de R$ 47,90 por apenas R$ 19,90 ⚡ válido até',
   },
   hero: {
     image: '/images/colecao-suprema-hero.webp',
@@ -48,9 +48,9 @@ export const pageContent = {
   },
   bonusesSection: { title: 'E para deixar sua experiência ainda mais completa, você ainda recebe 3 bônus' },
   bonuses: [
-    { src: '', alt: 'Imagem do bônus 01', label: 'Imagem do bônus 01', ratio: '1:1' as const, eyebrow: 'Bônus 01', title: 'Harpa Cristã Especial', description: 'Hinos tradicionais para tocar e louvar a Deus.', value: 'R$ 47,00' },
-    { src: '', alt: 'Imagem do bônus 02', label: 'Imagem do bônus 02', ratio: '1:1' as const, eyebrow: 'Bônus 02', title: 'Guia de Violão para Iniciantes', description: 'Conceitos básicos para quem está começando a tocar.', value: 'R$ 27,00' },
-    { src: '', alt: 'Imagem do bônus 03', label: 'Imagem do bônus 03', ratio: '1:1' as const, eyebrow: 'Bônus 03', title: 'Coleção Especial de Corinhos', description: '+200 corinhos com letras e cifras para tocar e cantar.', value: 'R$ 37,00' },
+    { src: '/images/bonus-01.webp', alt: 'Imagem do bônus 01', label: 'Imagem do bônus 01', ratio: '1:1' as const, eyebrow: 'Bônus 01', title: 'Harpa Cristã Especial', description: 'Hinos tradicionais para tocar e louvar a Deus.', value: 'R$ 47,00' },
+    { src: '/images/bonus-02.webp', alt: 'Imagem do bônus 02', label: 'Imagem do bônus 02', ratio: '1:1' as const, eyebrow: 'Bônus 02', title: 'Guia de Violão para Iniciantes', description: 'Conceitos básicos para quem está começando a tocar.', value: 'R$ 27,00' },
+    { src: '/images/bonus-03.webp', alt: 'Imagem do bônus 03', label: 'Imagem do bônus 03', ratio: '1:1' as const, eyebrow: 'Bônus 03', title: 'Coleção Especial de Corinhos', description: '+200 corinhos com letras e cifras para tocar e cantar.', value: 'R$ 37,00' },
   ],
   offersSection: {
     title: 'Agora você tem duas formas de começar',

@@ -16,7 +16,7 @@ function Button({ children, onClick, href, kind = 'primary' }: { children: React
 }
 
 function UrgencyBar() {
-  const formatDate = () => new Intl.DateTimeFormat('es', {
+  const formatDate = () => new Intl.DateTimeFormat('pt-BR', {
     day: 'numeric', month: 'long', year: 'numeric',
   }).format(new Date())
   const [localDate, setLocalDate] = useState(formatDate)
@@ -36,7 +36,7 @@ function UrgencyBar() {
   }, [])
 
   if (!pageContent.urgencyBar.enabled) return null
-  return <div className="urgency">{pageContent.urgencyBar.text}, {localDate}</div>
+  return <div className="urgency">{pageContent.urgencyBar.text} {localDate}</div>
 }
 
 function Price({ data }: { data: { previousPrice: string; installmentCount: number; installmentValue: string; cashValue: string } }) {
