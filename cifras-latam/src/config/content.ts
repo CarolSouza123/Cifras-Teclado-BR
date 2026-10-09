@@ -67,10 +67,10 @@ export const pageContent = {
   },
   offers: {
     simple: {
-      title: '🎸 Coleção 300 Louvores',
+      title: '🎸 Coleção 500 Louvores',
       subtitle: 'Tudo o que você precisa para começar!',
-      items: ['🎵 +300 cifras gospel', '🎸 Cifras simplificadas para facilitar o aprendizado', '🙌 Louvores para tocar no violão', '⚡ Acesso imediato', '📱 Material 100% digital'],
-      previousPrice: 'R$ XX,00', installmentCount: 4, installmentValue: 'R$ 5,63', cashValue: 'R$ 19,90', ctaLabel: 'Comece com 300 louvores',
+      items: ['🎵 +500 cifras gospel', '🎸 Cifras simplificadas para facilitar o aprendizado', '🙌 Louvores para tocar no violão', '⚡ Acesso imediato', '📱 Material 100% digital'],
+      previousPrice: 'R$ XX,00', installmentCount: 4, installmentValue: 'R$ 5,63', cashValue: 'R$ 19,90', ctaLabel: 'Comece com 500 louvores',
     },
     complete: {
       badge: '⭐ MAIS COMPLETA', title: '👑 Coleção Suprema — +2.000 Cifras Gospel',
