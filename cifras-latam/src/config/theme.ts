@@ -1,4 +1,4 @@
 export const theme = {
-  brand: { primary: '#2d2d2d', primaryDark: '#1f1f1f', primaryLight: '#4a4a4a' },
-  cta: { color: '#2d2d2d', dark: '#1f1f1f', light: '#4a4a4a' },
+  brand: { primary: '#f15a24', primaryDark: '#ca481c', primaryLight: '#ff783c' },
+  cta: { color: '#f15a24', dark: '#ca481c', light: '#ff6a31' },
 }
