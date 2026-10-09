@@ -1,10 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
+import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { Check, Minus, Plus, X } from 'lucide-react'
 import { pageContent, type MediaItem } from './config/content'
 import { links } from './config/links'
 import { seo } from './config/seo'
 import { theme } from './config/theme'
 import { withAttributionParams } from './utils/attribution'
+import { trackEvent, trackPageview } from './utils/track'
+
+const AdminPage = lazy(() => import('./admin/Admin'))
 
 const placeholder = (item: MediaItem, priority = false) => item.src ? (
   <img src={item.src} alt={item.alt} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : 'auto'} decoding="async" />
@@ -12,7 +15,7 @@ const placeholder = (item: MediaItem, priority = false) => item.src ? (
 
 function Button({ children, onClick, href, kind = 'primary' }: { children: React.ReactNode; onClick?: () => void; href?: string; kind?: 'primary' | 'secondary' }) {
   const className = `button button-${kind}`
-  return href ? <a className={className} href={href}>{children}</a> : <button className={className} type="button" onClick={onClick}>{children}</button>
+  return href ? <a className={className} href={href} onClick={onClick}>{children}</a> : <button className={className} type="button" onClick={onClick}>{children}</button>
 }
 
 function UrgencyBar() {
@@ -138,8 +141,8 @@ function UpgradeModal({ open, onClose }: { open: boolean; onClose: () => void })
       <button ref={closeButton} className="close" onClick={onClose} aria-label="Fechar"><X /></button>
       <span className="eyebrow">{pageContent.offers.popup.eyebrow}</span><p>{pageContent.offers.popup.message}</p><h2 id="modal-title">{pageContent.offers.popup.title}</h2>
       <FeatureList items={pageContent.offers.complete.items} /><Price data={pageContent.offers.popup} />
-      <Button href={links.checkoutUpgrade ? withAttributionParams(links.checkoutUpgrade) : undefined}>{pageContent.offers.popup.ctaLabel}</Button>
-      <Button kind="secondary" onClick={() => { onClose(); if (links.checkoutSimple) window.location.href = withAttributionParams(links.checkoutSimple) }}>{pageContent.offers.popup.secondaryLabel}</Button>
+      <Button href={links.checkoutUpgrade ? withAttributionParams(links.checkoutUpgrade) : undefined} onClick={() => trackEvent('checkout_click', { plan: 'completa', source: 'modal' })}>{pageContent.offers.popup.ctaLabel}</Button>
+      <Button kind="secondary" onClick={() => { trackEvent('checkout_click', { plan: 'simples', source: 'modal' }); onClose(); if (links.checkoutSimple) window.location.href = withAttributionParams(links.checkoutSimple) }}>{pageContent.offers.popup.secondaryLabel}</Button>
     </div>
   </div>
 }
@@ -163,12 +166,13 @@ function PitchSection({ index }: { index: number }) {
 }
 
 function SampleSection() {
-  return <section className="section"><div className="container"><div className="sample-card"><div className="sample-text"><span className="sample-eyebrow">{pageContent.sampleSection.eyebrow}</span><h2>{pageContent.sampleSection.title} <span>{pageContent.sampleSection.titleHighlight}</span></h2><p className="sample-body">{pageContent.sampleSection.body}</p><p>{pageContent.sampleSection.note}</p><Button kind="secondary" href={links.samplePdf}>{pageContent.sampleSection.ctaLabel}</Button></div><div className="sample-media">{pageContent.sampleSection.image ? <img src={pageContent.sampleSection.image} alt={pageContent.sampleSection.imageAlt} loading="lazy" decoding="async" /> : <div className="placeholder" role="img" aria-label={pageContent.sampleSection.imageAlt}><span>Cifra gospel de exemplo</span><small>900 × 1200 • 3:4</small></div>}</div></div></div></section>
+  return <section className="section"><div className="container"><div className="sample-card"><div className="sample-text"><span className="sample-eyebrow">{pageContent.sampleSection.eyebrow}</span><h2>{pageContent.sampleSection.title} <span>{pageContent.sampleSection.titleHighlight}</span></h2><p className="sample-body">{pageContent.sampleSection.body}</p><p>{pageContent.sampleSection.note}</p><Button kind="secondary" href={links.samplePdf} onClick={() => trackEvent('sample_click')}>{pageContent.sampleSection.ctaLabel}</Button></div><div className="sample-media">{pageContent.sampleSection.image ? <img src={pageContent.sampleSection.image} alt={pageContent.sampleSection.imageAlt} loading="lazy" decoding="async" /> : <div className="placeholder" role="img" aria-label={pageContent.sampleSection.imageAlt}><span>Cifra gospel de exemplo</span><small>900 × 1200 • 3:4</small></div>}</div></div></div></section>
 }
 
-function App() {
+function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [faqOpen, setFaqOpen] = useState<number | null>(0)
+  useEffect(() => { trackPageview() }, [])
   useEffect(() => {
     document.title = seo.title
     const setMeta = (attribute: 'name' | 'property', key: string, content: string) => {
@@ -200,7 +204,7 @@ function App() {
       <section className="section section-muted"><div className="container"><h2>{pageContent.bonusesSection.title}</h2><div className="card-grid">{pageContent.bonuses.map(item => <article className="content-card bonus" key={item.eyebrow}><div className="square-media">{placeholder(item)}</div><span className="eyebrow">🎁 {item.eyebrow}: incluso na oferta completa</span><h3>{item.title}</h3><p>{item.description}</p>{item.value && <s>{item.value}</s>}</article>)}</div></div></section>
       <section className="section" id="ofertas"><div className="container"><h2>{pageContent.offersSection.title}</h2><p className="section-intro">{pageContent.offersSection.subtitle}</p><div className="offers">
         <article className="offer-card"><h3>{pageContent.offers.simple.title}</h3><p className="offer-subtitle">{pageContent.offers.simple.subtitle}</p><FeatureList items={pageContent.offers.simple.items} /><Price data={pageContent.offers.simple} /><div className="offer-action"><Button kind="secondary" onClick={() => setModalOpen(true)}>{pageContent.offers.simple.ctaLabel}</Button><img src={pageContent.offersSection.paymentSecurityImage} alt={pageContent.offersSection.paymentSecurityAlt} loading="lazy" decoding="async" width={554} height={119} /></div></article>
-        <article className="offer-card featured"><span className="offer-badge">{pageContent.offers.complete.badge}</span><h3>{pageContent.offers.complete.title}</h3><p className="offer-subtitle">{pageContent.offers.complete.subtitle}</p><FeatureList items={pageContent.offers.complete.items} /><Price data={pageContent.offers.complete} /><div className="offer-action"><Button href={links.checkoutComplete ? withAttributionParams(links.checkoutComplete) : undefined}>{pageContent.offers.complete.ctaLabel}</Button><img src={pageContent.offersSection.paymentSecurityImage} alt={pageContent.offersSection.paymentSecurityAlt} loading="lazy" decoding="async" width={554} height={119} /></div></article>
+        <article className="offer-card featured"><span className="offer-badge">{pageContent.offers.complete.badge}</span><h3>{pageContent.offers.complete.title}</h3><p className="offer-subtitle">{pageContent.offers.complete.subtitle}</p><FeatureList items={pageContent.offers.complete.items} /><Price data={pageContent.offers.complete} /><div className="offer-action"><Button href={links.checkoutComplete ? withAttributionParams(links.checkoutComplete) : undefined} onClick={() => trackEvent('checkout_click', { plan: 'completa', source: 'card' })}>{pageContent.offers.complete.ctaLabel}</Button><img src={pageContent.offersSection.paymentSecurityImage} alt={pageContent.offersSection.paymentSecurityAlt} loading="lazy" decoding="async" width={554} height={119} /></div></article>
       </div></div></section>
       <section className="section section-muted"><div className="container guarantee"><img className="guarantee-seal" src={pageContent.guarantee.image} alt={pageContent.guarantee.imageAlt} loading="lazy" decoding="async" width={523} height={523} /><div><h2>{pageContent.guarantee.title}</h2><p>{pageContent.guarantee.body}</p></div></div></section>
       <section className="section"><div className="container narrow"><h2>{pageContent.faqSection.title}</h2><div className="faq">{pageContent.faq.map((item, index) => { const expanded = faqOpen === index; return <div className="faq-item" key={item.question}><button onClick={() => setFaqOpen(expanded ? null : index)} aria-expanded={expanded} aria-controls={`faq-${index}`}><span>{item.question}</span>{expanded ? <Minus /> : <Plus />}</button><div id={`faq-${index}`} hidden={!expanded}><p>{item.answer}</p></div></div> })}</div></div></section>
@@ -208,6 +212,13 @@ function App() {
     <footer><div className="container"><strong>{pageContent.footer.brand}</strong><p>{pageContent.footer.copyright}</p><nav aria-label="Links legais">{links.privacy && <a href={links.privacy}>Privacidade</a>}{links.terms && <a href={links.terms}>Termos</a>}{links.support && <a href={links.support}>Suporte</a>}</nav></div></footer>
     <UpgradeModal open={modalOpen} onClose={() => setModalOpen(false)} />
   </>
+}
+
+function App() {
+  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')) {
+    return <Suspense fallback={<div style={{ padding: 24, fontFamily: 'system-ui, sans-serif' }}>Carregando painel…</div>}><AdminPage /></Suspense>
+  }
+  return <LandingPage />
 }
 
 export default App
