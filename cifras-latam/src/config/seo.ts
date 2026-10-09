@@ -1,1 +1,1 @@
-export const seo = { title: 'Colección Suprema de Cifras Gospel', description: '', canonical: '', ogTitle: '', ogDescription: '', ogImage: '', robots: 'index,follow' }
+export const seo = { title: 'Coleção Suprema', description: '', canonical: '', ogTitle: '', ogDescription: '', ogImage: '', robots: 'index,follow' }
