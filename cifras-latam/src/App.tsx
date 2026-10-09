@@ -142,11 +142,13 @@ function UpgradeModal({ open, onClose }: { open: boolean; onClose: () => void })
 
 type FeatureItem = string | { label: string; value?: string }
 
+const renderLabel = (label: string) => label.split('**').map((part, index) => index % 2 ? <strong key={index}>{part}</strong> : part)
+
 const FeatureList = ({ items }: { items: readonly FeatureItem[] }) => <ul className="feature-list">{items.map(item => {
   const label = typeof item === 'string' ? item : item.label
   const value = typeof item === 'string' ? '' : item.value
   const hasEmoji = /^\p{Extended_Pictographic}/u.test(label)
-  return <li key={label}>{!hasEmoji && <Check aria-hidden="true" />}<span>{label}{value && <> <s className="bonus-value">{value}</s></>}</span></li>
+  return <li key={label}>{!hasEmoji && <Check aria-hidden="true" />}<span>{renderLabel(label)}{value && <> <s className="bonus-value">{value}</s></>}</span></li>
 })}</ul>
 
 function PitchSection({ index }: { index: number }) {
