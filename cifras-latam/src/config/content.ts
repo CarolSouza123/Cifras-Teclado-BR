@@ -15,6 +15,28 @@ export const pageContent = {
     securityImage: '/images/selos-seguranca-compra.svg',
     securityImageAlt: 'Selos de compra segura, satisfação garantida e privacidade protegida',
   },
+  about: [
+    {
+      title: 'A Coleção Suprema é o melhor pacote de cifras que você vai encontrar',
+      paragraphs: [
+        'As cifras mais pesquisadas de todos os tempos agora organizadas, separadas por hinos mais novos e hinos da harpa cristã, prontas para imprimir, revisadas e simplificadas',
+        'Talvez você não queira se tornar um músico profissional, mas vai poder tocar seus louvores preferidos na sua igreja',
+      ],
+    },
+    {
+      title: '+ 100 Cifras para baixar!',
+      paragraphs: [
+        'Esqueça aquelas cifras bagunçadas da internet cheias de propagandas. Nosso material é limpo, organizado e feito para você tocar sem travar.',
+        'Basta pegar seu instrumento, abrir a Coleção Suprema e começar a tocar.',
+      ],
+    },
+  ],
+  sampleSection: {
+    title: 'Teste a qualidade antes de comprar',
+    body: 'Baixe agora uma das cifras do pacote GRATUITAMENTE!',
+    note: 'Clique no botão abaixo para baixar a cifra no formato PDF e testar antes de comprar',
+    ctaLabel: 'Baixar cifra grátis',
+  },
   results: {
     title: 'Imagine poder lembrar de um louvor, abrir a Coleção Suprema de Cifras Gospel e começar a tocar. Veja o que outros cristãos dizem',
     items: Array.from({ length: 6 }, (_, index) => ({

@@ -61,23 +61,44 @@ function Carousel() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     let frame = 0
     let previousTime = performance.now()
+    let paused = false
+    let resumeTimer: ReturnType<typeof setTimeout>
+    const pause = () => { paused = true; clearTimeout(resumeTimer) }
+    const resume = () => { clearTimeout(resumeTimer); resumeTimer = setTimeout(() => { paused = false }, 2500) }
     const animate = (time: number) => {
       const segment = segmentWidth()
-      if (segment) {
+      if (segment && !paused) {
         element.scrollLeft += ((time - previousTime) / 1000) * 75
         if (element.scrollLeft >= segment * 2) element.scrollLeft -= segment
       }
       previousTime = time
       frame = window.requestAnimationFrame(animate)
     }
+    element.addEventListener('pointerdown', pause)
+    element.addEventListener('pointerup', resume)
+    element.addEventListener('pointercancel', resume)
+    element.addEventListener('mouseenter', pause)
+    element.addEventListener('mouseleave', resume)
+    element.addEventListener('touchstart', pause, { passive: true })
+    element.addEventListener('touchend', resume)
+    element.addEventListener('wheel', resume, { passive: true })
     const observer = new ResizeObserver(initialize)
     observer.observe(element)
     if (!reduceMotion) frame = window.requestAnimationFrame(animate)
     window.addEventListener('resize', initialize)
     return () => {
       if (frame) window.cancelAnimationFrame(frame)
+      clearTimeout(resumeTimer)
       observer.disconnect()
       window.removeEventListener('resize', initialize)
+      element.removeEventListener('pointerdown', pause)
+      element.removeEventListener('pointerup', resume)
+      element.removeEventListener('pointercancel', resume)
+      element.removeEventListener('mouseenter', pause)
+      element.removeEventListener('mouseleave', resume)
+      element.removeEventListener('touchstart', pause)
+      element.removeEventListener('touchend', resume)
+      element.removeEventListener('wheel', resume)
     }
   }, [])
 
@@ -127,6 +148,14 @@ const FeatureList = ({ items }: { items: readonly FeatureItem[] }) => <ul classN
   return <li key={label}><Check aria-hidden="true" /><span>{label}{value && <> <s className="bonus-value">{value}</s></>}</span></li>
 })}</ul>
 
+function PitchSections() {
+  return <>{pageContent.about.map((block, index) => <section className={index % 2 ? 'section section-muted' : 'section'} key={block.title}><div className="container guarantee"><div><h2>{block.title}</h2>{block.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div></div></section>)}</>
+}
+
+function SampleSection() {
+  return <section className="section"><div className="container guarantee"><div><h2>{pageContent.sampleSection.title}</h2><p className="lead">{pageContent.sampleSection.body}</p><p>{pageContent.sampleSection.note}</p><Button href={links.samplePdf}>{pageContent.sampleSection.ctaLabel}</Button></div></div></section>
+}
+
 function App() {
   const [modalOpen, setModalOpen] = useState(false)
   const [faqOpen, setFaqOpen] = useState<number | null>(0)
@@ -154,6 +183,8 @@ function App() {
     <UrgencyBar />
     <main>
       <section className="hero"><div className="container hero-inner"><div className="hero-media">{placeholder({ src: pageContent.hero.image, alt: pageContent.hero.imageAlt, label: 'Imagem da Hero', ratio: '3:2' }, true)}</div><h1>{pageContent.hero.headline}</h1><p className="lead">{pageContent.hero.body}</p><div className="hero-action"><Button onClick={() => document.getElementById('ofertas')?.scrollIntoView({ behavior: 'smooth' })}>{pageContent.hero.ctaLabel}</Button><img src={pageContent.hero.securityImage} alt={pageContent.hero.securityImageAlt} /></div></div></section>
+      <PitchSections />
+      <SampleSection />
       <section className="section section-muted"><div className="container"><h2>{pageContent.results.title}</h2><Carousel /></div></section>
       <section className="section section-muted"><div className="container"><h2>{pageContent.bonusesSection.title}</h2><div className="card-grid">{pageContent.bonuses.map(item => <article className="content-card bonus" key={item.eyebrow}><div className="square-media">{placeholder(item)}</div><span className="eyebrow">🎁 {item.eyebrow}: incluso na oferta completa</span><h3>{item.title}</h3><p>{item.description}</p>{item.value && <s>{item.value}</s>}</article>)}</div></div></section>
       <section className="section" id="ofertas"><div className="container"><h2>{pageContent.offersSection.title}</h2><div className="offers">
