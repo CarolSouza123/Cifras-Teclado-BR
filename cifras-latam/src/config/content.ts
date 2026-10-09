@@ -90,7 +90,7 @@ export const pageContent = {
     },
     popup: {
       eyebrow: 'Espere! Não saia ainda...',
-      message: 'Você escolheu a oferta simples. Mas existe uma condição especial antes de finalizar: em vez de ficar apenas com as 7 mágicas, você pode desbloquear agora o Combo 7 Mágicas, os 3 módulos, acesso vitalício e os 3 bônus.',
+      message: 'Você escolheu a oferta simples. Mas existe uma condição especial antes de finalizar: em vez de ficar apenas com o plano básico, você pode desbloquear agora a Coleção Suprema com os bônus.',
       title: 'Oferta especial', previousPrice: 'R$ XX,00', installmentCount: 9, installmentValue: 'R$ 5,15', cashValue: 'R$ 37,90',
       ctaLabel: 'Sim! Quero a oferta completa por R$ 37,90', secondaryLabel: 'Não, quero continuar com a oferta simples.',
     },

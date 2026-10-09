@@ -13,9 +13,9 @@ const placeholder = (item: MediaItem, priority = false) => item.src ? (
   <img src={item.src} alt={item.alt} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : 'auto'} decoding="async" />
 ) : <div className="placeholder" role="img" aria-label={item.alt}><span>{item.label}</span><small>{item.ratio === '3:2' ? '1200 × 800' : item.ratio === '3:4' ? '1200 × 1600' : item.ratio === '2:3' ? '1200 × 1800' : '1200 × 1200'} • {item.ratio}</small></div>
 
-function Button({ children, onClick, href, kind = 'primary' }: { children: React.ReactNode; onClick?: () => void; href?: string; kind?: 'primary' | 'secondary' }) {
+function Button({ children, onClick, href, kind = 'primary', download = false }: { children: React.ReactNode; onClick?: () => void; href?: string; kind?: 'primary' | 'secondary'; download?: boolean }) {
   const className = `button button-${kind}`
-  return href ? <a className={className} href={href} onClick={onClick}>{children}</a> : <button className={className} type="button" onClick={onClick}>{children}</button>
+  return href ? <a className={className} href={href} onClick={onClick} {...(download ? { download: '' } : {})}>{children}</a> : <button className={className} type="button" onClick={onClick}>{children}</button>
 }
 
 function UrgencyBar() {
@@ -161,12 +161,12 @@ const FeatureList = ({ items }: { items: readonly FeatureItem[] }) => <ul classN
 function PitchSection({ index }: { index: number }) {
   const block = pageContent.about[index]
   if (!block) return null
-  if ('highlights' in block && block.highlights) return <section className="section"><div className="container"><div className="download-card"><h2>{block.title}</h2>{block.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}<ul className="highlight-row">{block.highlights.map(item => <li key={item}><Check aria-hidden="true" />{item}</li>)}</ul><Button onClick={() => document.getElementById('ofertas')?.scrollIntoView({ behavior: 'smooth' })}>{block.ctaLabel}</Button></div></div></section>
+  if ('highlights' in block && block.highlights) return <section className="section"><div className="container"><div className="download-card"><h2>{block.title}</h2>{block.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}<ul className="highlight-row">{block.highlights.map(item => <li key={item}><Check aria-hidden="true" />{item}</li>)}</ul></div></div></section>
   return <section className="section"><div className="container guarantee"><div><h2>{block.title}</h2>{block.paragraphs.map(paragraph => <p key={paragraph}>{renderLabel(paragraph)}</p>)}</div></div></section>
 }
 
 function SampleSection() {
-  return <section className="section"><div className="container"><div className="sample-card"><div className="sample-text"><span className="sample-eyebrow">{pageContent.sampleSection.eyebrow}</span><h2>{pageContent.sampleSection.title} <span>{pageContent.sampleSection.titleHighlight}</span></h2><p className="sample-body">{pageContent.sampleSection.body}</p><p>{pageContent.sampleSection.note}</p><Button kind="secondary" href={links.samplePdf} onClick={() => trackEvent('sample_click')}>{pageContent.sampleSection.ctaLabel}</Button></div><div className="sample-media">{pageContent.sampleSection.image ? <img src={pageContent.sampleSection.image} alt={pageContent.sampleSection.imageAlt} loading="lazy" decoding="async" /> : <div className="placeholder" role="img" aria-label={pageContent.sampleSection.imageAlt}><span>Cifra gospel de exemplo</span><small>900 × 1200 • 3:4</small></div>}</div></div></div></section>
+  return <section className="section"><div className="container"><div className="sample-card"><div className="sample-text"><span className="sample-eyebrow">{pageContent.sampleSection.eyebrow}</span><h2>{pageContent.sampleSection.title} <span>{pageContent.sampleSection.titleHighlight}</span></h2><p className="sample-body">{pageContent.sampleSection.body}</p><p>{pageContent.sampleSection.note}</p><Button kind="secondary" href={links.samplePdf} download onClick={() => trackEvent('sample_click')}>{pageContent.sampleSection.ctaLabel}</Button></div><div className="sample-media">{pageContent.sampleSection.image ? <img src={pageContent.sampleSection.image} alt={pageContent.sampleSection.imageAlt} loading="lazy" decoding="async" /> : <div className="placeholder" role="img" aria-label={pageContent.sampleSection.imageAlt}><span>Cifra gospel de exemplo</span><small>900 × 1200 • 3:4</small></div>}</div></div></div></section>
 }
 
 function LandingPage() {
