@@ -9,7 +9,7 @@ export const pageContent = {
   hero: {
     image: '/images/colecao-suprema-hero.webp',
     imageAlt: 'Coleção Suprema de Cifras Gospel: coleção completa e bônus',
-    headline: 'Coleção Suprema com mais de 100 cifras simplificadas de louvores',
+    headline: 'Coleção Suprema com +2000 cifras simplificadas de louvores',
     body: 'Chega de dificuldades para tocar na igreja, nos cultos ou em casa. Um método simples para cristãos que querem começar a tocar louvores diferentes em alguns dias, mesmo que achem que não tem talento.',
     ctaLabel: 'Quero os louvores agora',
     securityImage: '/images/selos-seguranca-compra.svg',
@@ -32,13 +32,18 @@ export const pageContent = {
     },
   ],
   sampleSection: {
-    title: 'Teste a qualidade antes de comprar',
+    eyebrow: 'Presente para você',
+    title: 'Teste a qualidade',
+    titleHighlight: 'antes de comprar',
     body: 'Baixe agora uma das cifras do pacote GRATUITAMENTE!',
     note: 'Clique no botão abaixo para baixar a cifra no formato PDF e testar antes de comprar',
     ctaLabel: 'Baixar cifra grátis',
+    image: '',
+    imageAlt: 'Página de cifra gospel do pacote',
   },
   results: {
-    title: 'Imagine poder lembrar de um louvor, abrir a Coleção Suprema de Cifras Gospel e começar a tocar. Veja o que outros cristãos dizem',
+    title: 'Imagine poder lembrar de um louvor, abrir a Coleção Suprema de Cifras Gospel e começar a tocar.',
+    subtitle: 'Veja o que outros cristãos dizem',
     items: Array.from({ length: 6 }, (_, index) => ({
       src: '',
       alt: `Placeholder: Depoimento ${String(index + 1).padStart(2, '0')}`,

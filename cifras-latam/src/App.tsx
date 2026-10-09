@@ -155,7 +155,7 @@ function PitchSection({ index }: { index: number }) {
 }
 
 function SampleSection() {
-  return <section className="section"><div className="container guarantee"><div><h2>{pageContent.sampleSection.title}</h2><p className="lead">{pageContent.sampleSection.body}</p><p>{pageContent.sampleSection.note}</p><Button href={links.samplePdf}>{pageContent.sampleSection.ctaLabel}</Button></div></div></section>
+  return <section className="section"><div className="container"><div className="sample-card"><div className="sample-text"><span className="sample-eyebrow">{pageContent.sampleSection.eyebrow}</span><h2>{pageContent.sampleSection.title} <span>{pageContent.sampleSection.titleHighlight}</span></h2><p className="sample-body">{pageContent.sampleSection.body}</p><p>{pageContent.sampleSection.note}</p><Button kind="secondary" href={links.samplePdf}>{pageContent.sampleSection.ctaLabel}</Button></div><div className="sample-media">{pageContent.sampleSection.image ? <img src={pageContent.sampleSection.image} alt={pageContent.sampleSection.imageAlt} loading="lazy" /> : <div className="placeholder" role="img" aria-label={pageContent.sampleSection.imageAlt}><span>Cifra gospel de exemplo</span><small>900 × 1200 • 3:4</small></div>}</div></div></div></section>
 }
 
 function App() {
@@ -187,7 +187,7 @@ function App() {
       <section className="hero"><div className="container hero-inner"><div className="hero-media">{placeholder({ src: pageContent.hero.image, alt: pageContent.hero.imageAlt, label: 'Imagem da Hero', ratio: '3:2' }, true)}</div><h1>{pageContent.hero.headline}</h1><p className="lead">{pageContent.hero.body}</p><div className="hero-action"><Button onClick={() => document.getElementById('ofertas')?.scrollIntoView({ behavior: 'smooth' })}>{pageContent.hero.ctaLabel}</Button><img src={pageContent.hero.securityImage} alt={pageContent.hero.securityImageAlt} /></div></div></section>
       <PitchSection index={0} />
       <SampleSection />
-      <section className="section section-muted"><div className="container"><h2>{pageContent.results.title}</h2><Carousel /></div></section>
+      <section className="section section-muted"><div className="container"><h2>{pageContent.results.title}<span className="title-line2">{pageContent.results.subtitle}</span></h2><Carousel /></div></section>
       <PitchSection index={1} />
       <section className="section section-muted"><div className="container"><h2>{pageContent.bonusesSection.title}</h2><div className="card-grid">{pageContent.bonuses.map(item => <article className="content-card bonus" key={item.eyebrow}><div className="square-media">{placeholder(item)}</div><span className="eyebrow">🎁 {item.eyebrow}: incluso na oferta completa</span><h3>{item.title}</h3><p>{item.description}</p>{item.value && <s>{item.value}</s>}</article>)}</div></div></section>
       <section className="section" id="ofertas"><div className="container"><h2>{pageContent.offersSection.title}</h2><div className="offers">
