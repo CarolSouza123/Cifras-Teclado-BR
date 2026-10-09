@@ -17,10 +17,11 @@ export const pageContent = {
   },
   about: [
     {
-      title: 'A Coleção Suprema é o melhor pacote de cifras que você vai encontrar',
+      title: 'Tenha seus louvores favoritos reunidos em uma só coleção 🎸',
       paragraphs: [
-        'As cifras mais pesquisadas de todos os tempos agora organizadas, separadas por hinos mais novos e hinos da harpa cristã, prontas para imprimir, revisadas e simplificadas',
-        'Talvez você não queira se tornar um músico profissional, mas vai poder tocar seus louvores preferidos na sua igreja',
+        '**Mais praticidade para encontrar, imprimir e tocar os louvores que fazem parte da sua fé.**',
+        'A Coleção Suprema reúne cifras gospel organizadas para facilitar sua busca, com hinos da Harpa Cristã e louvores de diferentes artistas e ministérios. Encontre seu repertório com mais facilidade e tenha as cifras à mão para seus momentos de louvor.',
+        'Você não precisa ser um músico profissional para começar. Com cifras simplificadas e um pouco de prática, você pode aprender a acompanhar seus louvores favoritos no violão — em casa, na igreja ou na célula.',
       ],
     },
     {

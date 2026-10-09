@@ -7,7 +7,7 @@ import { theme } from './config/theme'
 import { withAttributionParams } from './utils/attribution'
 
 const placeholder = (item: MediaItem, priority = false) => item.src ? (
-  <img src={item.src} alt={item.alt} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : 'auto'} />
+  <img src={item.src} alt={item.alt} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : 'auto'} decoding="async" />
 ) : <div className="placeholder" role="img" aria-label={item.alt}><span>{item.label}</span><small>{item.ratio === '3:2' ? '1200 × 800' : item.ratio === '3:4' ? '1200 × 1600' : item.ratio === '2:3' ? '1200 × 1800' : '1200 × 1200'} • {item.ratio}</small></div>
 
 function Button({ children, onClick, href, kind = 'primary' }: { children: React.ReactNode; onClick?: () => void; href?: string; kind?: 'primary' | 'secondary' }) {
@@ -62,12 +62,13 @@ function Carousel() {
     let frame = 0
     let previousTime = performance.now()
     let paused = false
+    let inViewport = true
     let resumeTimer: ReturnType<typeof setTimeout>
     const pause = () => { paused = true; clearTimeout(resumeTimer) }
     const resume = () => { clearTimeout(resumeTimer); resumeTimer = setTimeout(() => { paused = false }, 2500) }
     const animate = (time: number) => {
       const segment = segmentWidth()
-      if (segment && !paused) {
+      if (segment && !paused && inViewport) {
         element.scrollLeft += ((time - previousTime) / 1000) * 75
         if (element.scrollLeft >= segment * 2) element.scrollLeft -= segment
       }
@@ -84,12 +85,15 @@ function Carousel() {
     element.addEventListener('wheel', resume, { passive: true })
     const observer = new ResizeObserver(initialize)
     observer.observe(element)
+    const viewportObserver = new IntersectionObserver(entries => { inViewport = entries[0]?.isIntersecting ?? true }, { threshold: 0 })
+    viewportObserver.observe(element)
     if (!reduceMotion) frame = window.requestAnimationFrame(animate)
     window.addEventListener('resize', initialize)
     return () => {
       if (frame) window.cancelAnimationFrame(frame)
       clearTimeout(resumeTimer)
       observer.disconnect()
+      viewportObserver.disconnect()
       window.removeEventListener('resize', initialize)
       element.removeEventListener('pointerdown', pause)
       element.removeEventListener('pointerup', resume)
@@ -155,11 +159,11 @@ function PitchSection({ index }: { index: number }) {
   const block = pageContent.about[index]
   if (!block) return null
   if ('highlights' in block && block.highlights) return <section className="section"><div className="container"><div className="download-card"><h2>{block.title}</h2>{block.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}<ul className="highlight-row">{block.highlights.map(item => <li key={item}><Check aria-hidden="true" />{item}</li>)}</ul><Button onClick={() => document.getElementById('ofertas')?.scrollIntoView({ behavior: 'smooth' })}>{block.ctaLabel}</Button></div></div></section>
-  return <section className="section"><div className="container guarantee"><div><h2>{block.title}</h2>{block.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div></div></section>
+  return <section className="section"><div className="container guarantee"><div><h2>{block.title}</h2>{block.paragraphs.map(paragraph => <p key={paragraph}>{renderLabel(paragraph)}</p>)}</div></div></section>
 }
 
 function SampleSection() {
-  return <section className="section"><div className="container"><div className="sample-card"><div className="sample-text"><span className="sample-eyebrow">{pageContent.sampleSection.eyebrow}</span><h2>{pageContent.sampleSection.title} <span>{pageContent.sampleSection.titleHighlight}</span></h2><p className="sample-body">{pageContent.sampleSection.body}</p><p>{pageContent.sampleSection.note}</p><Button kind="secondary" href={links.samplePdf}>{pageContent.sampleSection.ctaLabel}</Button></div><div className="sample-media">{pageContent.sampleSection.image ? <img src={pageContent.sampleSection.image} alt={pageContent.sampleSection.imageAlt} loading="lazy" /> : <div className="placeholder" role="img" aria-label={pageContent.sampleSection.imageAlt}><span>Cifra gospel de exemplo</span><small>900 × 1200 • 3:4</small></div>}</div></div></div></section>
+  return <section className="section"><div className="container"><div className="sample-card"><div className="sample-text"><span className="sample-eyebrow">{pageContent.sampleSection.eyebrow}</span><h2>{pageContent.sampleSection.title} <span>{pageContent.sampleSection.titleHighlight}</span></h2><p className="sample-body">{pageContent.sampleSection.body}</p><p>{pageContent.sampleSection.note}</p><Button kind="secondary" href={links.samplePdf}>{pageContent.sampleSection.ctaLabel}</Button></div><div className="sample-media">{pageContent.sampleSection.image ? <img src={pageContent.sampleSection.image} alt={pageContent.sampleSection.imageAlt} loading="lazy" decoding="async" /> : <div className="placeholder" role="img" aria-label={pageContent.sampleSection.imageAlt}><span>Cifra gospel de exemplo</span><small>900 × 1200 • 3:4</small></div>}</div></div></div></section>
 }
 
 function App() {
@@ -188,17 +192,17 @@ function App() {
   return <>
     <UrgencyBar />
     <main>
-      <section className="hero"><div className="container hero-inner"><div className="hero-media">{placeholder({ src: pageContent.hero.image, alt: pageContent.hero.imageAlt, label: 'Imagem da Hero', ratio: '3:2' }, true)}</div><h1>{pageContent.hero.headline}</h1><p className="lead">{pageContent.hero.body}</p><div className="hero-action"><Button onClick={() => document.getElementById('ofertas')?.scrollIntoView({ behavior: 'smooth' })}>{pageContent.hero.ctaLabel}</Button><img src={pageContent.hero.securityImage} alt={pageContent.hero.securityImageAlt} /></div></div></section>
+      <section className="hero"><div className="container hero-inner"><div className="hero-media">{placeholder({ src: pageContent.hero.image, alt: pageContent.hero.imageAlt, label: 'Imagem da Hero', ratio: '3:2' }, true)}</div><h1>{pageContent.hero.headline}</h1><p className="lead">{pageContent.hero.body}</p><div className="hero-action"><Button onClick={() => document.getElementById('ofertas')?.scrollIntoView({ behavior: 'smooth' })}>{pageContent.hero.ctaLabel}</Button><img src={pageContent.hero.securityImage} alt={pageContent.hero.securityImageAlt} width={525} height={44} decoding="async" /></div></div></section>
       <PitchSection index={0} />
       <SampleSection />
       <section className="section section-muted"><div className="container"><h2>{pageContent.results.title}<span className="title-line2">{pageContent.results.subtitle}</span></h2><Carousel /></div></section>
       <PitchSection index={1} />
       <section className="section section-muted"><div className="container"><h2>{pageContent.bonusesSection.title}</h2><div className="card-grid">{pageContent.bonuses.map(item => <article className="content-card bonus" key={item.eyebrow}><div className="square-media">{placeholder(item)}</div><span className="eyebrow">🎁 {item.eyebrow}: incluso na oferta completa</span><h3>{item.title}</h3><p>{item.description}</p>{item.value && <s>{item.value}</s>}</article>)}</div></div></section>
       <section className="section" id="ofertas"><div className="container"><h2>{pageContent.offersSection.title}</h2><p className="section-intro">{pageContent.offersSection.subtitle}</p><div className="offers">
-        <article className="offer-card"><h3>{pageContent.offers.simple.title}</h3><p className="offer-subtitle">{pageContent.offers.simple.subtitle}</p><FeatureList items={pageContent.offers.simple.items} /><Price data={pageContent.offers.simple} /><div className="offer-action"><Button kind="secondary" onClick={() => setModalOpen(true)}>{pageContent.offers.simple.ctaLabel}</Button><img src={pageContent.offersSection.paymentSecurityImage} alt={pageContent.offersSection.paymentSecurityAlt} loading="lazy" /></div></article>
-        <article className="offer-card featured"><span className="offer-badge">{pageContent.offers.complete.badge}</span><h3>{pageContent.offers.complete.title}</h3><p className="offer-subtitle">{pageContent.offers.complete.subtitle}</p><FeatureList items={pageContent.offers.complete.items} /><Price data={pageContent.offers.complete} /><div className="offer-action"><Button href={links.checkoutComplete ? withAttributionParams(links.checkoutComplete) : undefined}>{pageContent.offers.complete.ctaLabel}</Button><img src={pageContent.offersSection.paymentSecurityImage} alt={pageContent.offersSection.paymentSecurityAlt} loading="lazy" /></div></article>
+        <article className="offer-card"><h3>{pageContent.offers.simple.title}</h3><p className="offer-subtitle">{pageContent.offers.simple.subtitle}</p><FeatureList items={pageContent.offers.simple.items} /><Price data={pageContent.offers.simple} /><div className="offer-action"><Button kind="secondary" onClick={() => setModalOpen(true)}>{pageContent.offers.simple.ctaLabel}</Button><img src={pageContent.offersSection.paymentSecurityImage} alt={pageContent.offersSection.paymentSecurityAlt} loading="lazy" decoding="async" width={554} height={119} /></div></article>
+        <article className="offer-card featured"><span className="offer-badge">{pageContent.offers.complete.badge}</span><h3>{pageContent.offers.complete.title}</h3><p className="offer-subtitle">{pageContent.offers.complete.subtitle}</p><FeatureList items={pageContent.offers.complete.items} /><Price data={pageContent.offers.complete} /><div className="offer-action"><Button href={links.checkoutComplete ? withAttributionParams(links.checkoutComplete) : undefined}>{pageContent.offers.complete.ctaLabel}</Button><img src={pageContent.offersSection.paymentSecurityImage} alt={pageContent.offersSection.paymentSecurityAlt} loading="lazy" decoding="async" width={554} height={119} /></div></article>
       </div></div></section>
-      <section className="section section-muted"><div className="container guarantee"><img className="guarantee-seal" src={pageContent.guarantee.image} alt={pageContent.guarantee.imageAlt} loading="lazy" /><div><h2>{pageContent.guarantee.title}</h2><p>{pageContent.guarantee.body}</p></div></div></section>
+      <section className="section section-muted"><div className="container guarantee"><img className="guarantee-seal" src={pageContent.guarantee.image} alt={pageContent.guarantee.imageAlt} loading="lazy" decoding="async" width={523} height={523} /><div><h2>{pageContent.guarantee.title}</h2><p>{pageContent.guarantee.body}</p></div></div></section>
       <section className="section"><div className="container narrow"><h2>{pageContent.faqSection.title}</h2><div className="faq">{pageContent.faq.map((item, index) => { const expanded = faqOpen === index; return <div className="faq-item" key={item.question}><button onClick={() => setFaqOpen(expanded ? null : index)} aria-expanded={expanded} aria-controls={`faq-${index}`}><span>{item.question}</span>{expanded ? <Minus /> : <Plus />}</button><div id={`faq-${index}`} hidden={!expanded}><p>{item.answer}</p></div></div> })}</div></div></section>
     </main>
     <footer><div className="container"><strong>{pageContent.footer.brand}</strong><p>{pageContent.footer.copyright}</p><nav aria-label="Links legais">{links.privacy && <a href={links.privacy}>Privacidade</a>}{links.terms && <a href={links.terms}>Termos</a>}{links.support && <a href={links.support}>Suporte</a>}</nav></div></footer>
