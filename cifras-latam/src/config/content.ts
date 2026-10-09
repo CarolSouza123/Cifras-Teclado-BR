@@ -41,15 +41,15 @@ export const pageContent = {
     body: 'Baixe agora uma das cifras do pacote GRATUITAMENTE!',
     note: 'Clique no botão abaixo para baixar a cifra no formato PDF e testar antes de comprar',
     ctaLabel: 'Baixar cifra grátis',
-    image: '',
+    image: '/images/cifra-gospel-de-exemplo.webp',
     imageAlt: 'Página de cifra gospel do pacote',
   },
   results: {
     title: 'Imagine poder lembrar de um louvor, abrir a Coleção Suprema de Cifras Gospel e começar a tocar.',
     subtitle: 'Veja o que outros cristãos dizem',
     items: Array.from({ length: 6 }, (_, index) => ({
-      src: '',
-      alt: `Placeholder: Depoimento ${String(index + 1).padStart(2, '0')}`,
+      src: `/images/depoimento-${String(index + 1).padStart(2, '0')}.webp`,
+      alt: `Depoimento ${String(index + 1).padStart(2, '0')}`,
       label: `Depoimento ${String(index + 1).padStart(2, '0')}`,
       ratio: '2:3' as const,
     })),
