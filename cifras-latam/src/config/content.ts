@@ -61,7 +61,7 @@ export const pageContent = {
     simple: {
       title: '🎸 Colección 300 Louvores',
       items: ['+300 cifras gospel', 'Cifras simplificadas', 'Louvores para tocar no violão', 'Acesso imediato', 'Material digital'],
-      previousPrice: 'R$ XX,00', installmentCount: 0, installmentValue: '', cashValue: 'R$ X,XX', ctaLabel: 'Comece com +300 louvores',
+      previousPrice: 'R$ XX,00', installmentCount: 4, installmentValue: 'R$ 5,63', cashValue: 'R$ 19,90', ctaLabel: 'Comece com +300 louvores',
     },
     complete: {
       badge: 'Mais vendido', title: '⭐ Colección Suprema + 2 Bônus',
@@ -73,13 +73,13 @@ export const pageContent = {
         { label: 'Acesso imediato' },
         { label: 'Material digital' },
       ],
-      previousPrice: 'R$ XX,00', installmentCount: 0, installmentValue: '', cashValue: 'R$ X,XX', ctaLabel: 'Quero a Colección Suprema',
+      previousPrice: 'R$ XX,00', installmentCount: 9, installmentValue: 'R$ 5,15', cashValue: 'R$ 37,90', ctaLabel: 'Quero a Colección Suprema',
     },
     popup: {
       eyebrow: 'Espere! Não saia ainda...',
       message: 'Você escolheu a oferta simples. Mas existe uma condição especial antes de finalizar: em vez de ficar apenas com as 7 mágicas, você pode desbloquear agora o Combo 7 Mágicas, os 3 módulos, acesso vitalício e os 3 bônus.',
-      title: 'Oferta especial', previousPrice: 'R$ 19,90', installmentCount: 3, installmentValue: 'R$ 5,46', cashValue: 'R$ 14,90',
-      ctaLabel: 'Sim! Quero a oferta completa por R$ 14,90', secondaryLabel: 'Não, quero continuar com a oferta simples.',
+      title: 'Oferta especial', previousPrice: 'R$ XX,00', installmentCount: 9, installmentValue: 'R$ 5,15', cashValue: 'R$ 37,90',
+      ctaLabel: 'Sim! Quero a oferta completa por R$ 37,90', secondaryLabel: 'Não, quero continuar com a oferta simples.',
     },
   },
   guarantee: {
