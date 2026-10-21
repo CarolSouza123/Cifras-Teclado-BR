@@ -47,7 +47,7 @@ export const pageContent = {
   ],
   offersSection: {
     title: 'Escolha a opção ideal para seu repertório',
-    subtitle: 'Se você prefere hinos tradicionais, pode começar pela coleção essencial. Se deseja mais variedade e materiais complementares, a Coleção Suprema reúne uma oferta ampliada.',
+    subtitle: '',
     paymentSecurityImage: '/images/metodos-pagamento-seguranca.svg',
     paymentSecurityAlt: 'Métodos de pagamento e selos de compra segura, satisfação garantida e privacidade protegida',
   },
