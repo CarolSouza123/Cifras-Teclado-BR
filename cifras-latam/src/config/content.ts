@@ -53,7 +53,7 @@ export const pageContent = {
   },
   offers: {
     simple: {
-      title: '🎹 Harpa Cristã Essencial',
+      title: '🎹 Cifras Essencial',
       subtitle: 'Para quem prefere hinos tradicionais.',
       items: ['🎵 150 hinos da Harpa Cristã com cifras simplificadas para teclado', '🎵 Corinhos de Fogo', '📱 Materiais digitais incluídos no pacote'],
       previousPrice: 'R$ 49,90', installmentCount: 4, installmentValue: 'R$ 5,63', cashValue: 'R$ 19,90', ctaLabel: 'Quero a Harpa Cristã Essencial',
@@ -62,7 +62,7 @@ export const pageContent = {
       badge: '⭐ MAIS COMPLETA', title: '👑 Coleção Suprema Gospel para Teclado',
       subtitle: 'Para quem quer ampliar o repertório gospel.',
       items: [
-        '🎵 **600 cifras organizadas**',
+        '🎵 **+600 cifras organizadas**',
         '📖 **Bônus 01:** Harpa Cristã Completa — +400 hinos',
         '🔥 **Bônus 02:** Cifras Especiais Corinhos de Fogo',
         '🎼 **Bônus 03:** Louvores Modernos Simplificados',

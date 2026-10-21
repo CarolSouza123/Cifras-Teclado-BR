@@ -17,3 +17,9 @@
 .section-light h2, .section-light h3 { color:var(--text-on-dark) }
 .section-light .content-card { background:#fff; color:#24221f; box-shadow:0 10px 30px rgba(0,0,0,.10) }
 .section-light .content-card p { color:rgba(36,34,31,.85) }
+
+.offer-card.featured { background:linear-gradient(160deg, var(--brand-primary-light), var(--brand-primary) 55%, var(--brand-primary-dark)); border-color:transparent; color:#fff }
+.offer-card.featured h3, .offer-card.featured .price strong, .offer-card.featured .price b { color:#fff }
+.offer-card.featured .feature-list svg { color:#fff }
+.offer-card.featured .offer-badge { background:#fff; color:var(--brand-primary) }
+.offer-card.featured .button { background:#151412; animation:none; box-shadow:0 8px 24px rgba(0,0,0,.25) }
