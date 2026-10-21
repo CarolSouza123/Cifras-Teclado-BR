@@ -3,10 +3,12 @@
 .hero-highlights li { display:flex; align-items:center; gap:8px; color:#454038; font-weight:600 }
 .hero-highlights svg { width:20px; height:20px; flex:none; color:var(--brand-primary) }
 .results-closing { max-width:760px; margin:40px auto 0; font-size:18px; text-align:center }
+@media (min-width:1024px) { .bonus-grid { grid-template-columns:repeat(2,1fr); max-width:960px; margin-inline:auto } }
 .card-grid-2 { grid-template-columns:repeat(2,1fr); max-width:960px; margin-inline:auto }
 .materials-details { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px }
 .material-detail { padding:24px; border-radius:16px; background:var(--background-section) }
 .material-detail h3 { margin-bottom:10px; font-size:18px }
 .material-detail p { margin-bottom:0 }
 .materials-note { max-width:760px; margin:40px auto 0; font-size:15px; text-align:center; opacity:.85 }
-@media (max-width:767px) { .card-grid-2 { grid-template-columns:1fr } .materials-details { grid-template-columns:1fr } .hero-highlights { flex-direction:column; align-items:center; gap:10px } }
+@media (max-width:767px) { @media (min-width:1024px) { .bonus-grid { grid-template-columns:repeat(2,1fr); max-width:960px; margin-inline:auto } }
+.card-grid-2 { grid-template-columns:1fr } .materials-details { grid-template-columns:1fr } .hero-highlights { flex-direction:column; align-items:center; gap:10px } }
