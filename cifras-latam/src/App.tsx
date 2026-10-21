@@ -160,73 +160,8 @@ const FeatureList = ({ items }: { items: readonly FeatureItem[] }) => <ul classN
   return <li key={label}>{!hasEmoji && <Check aria-hidden="true" />}<span>{renderLabel(label)}{value && <> <s className="bonus-value">{value}</s></>}</span></li>
 })}</ul>
 
-function MaterialsCarousel() {
-  const ref = useRef<HTMLDivElement>(null)
-  const items = [...pageContent.materials.items, ...pageContent.materials.items, ...pageContent.materials.items]
-  const segmentWidth = () => (ref.current?.scrollWidth ?? 0) / 3
-
-  useEffect(() => {
-    const element = ref.current
-    if (!element) return
-    const initialize = () => element.scrollTo({ left: segmentWidth() })
-    initialize()
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    let frame = 0
-    let previousTime = performance.now()
-    let paused = false
-    let inViewport = true
-    let resumeTimer: ReturnType<typeof setTimeout>
-    const pause = () => { paused = true; clearTimeout(resumeTimer) }
-    const resume = () => { clearTimeout(resumeTimer); resumeTimer = setTimeout(() => { paused = false }, 2500) }
-    const animate = (time: number) => {
-      const segment = segmentWidth()
-      if (segment && !paused && inViewport) {
-        element.scrollLeft += ((time - previousTime) / 1000) * 75
-        if (element.scrollLeft >= segment * 2) element.scrollLeft -= segment
-      }
-      previousTime = time
-      frame = window.requestAnimationFrame(animate)
-    }
-    element.addEventListener('pointerdown', pause)
-    element.addEventListener('pointerup', resume)
-    element.addEventListener('pointercancel', resume)
-    element.addEventListener('mouseenter', pause)
-    element.addEventListener('mouseleave', resume)
-    element.addEventListener('touchstart', pause, { passive: true })
-    element.addEventListener('touchend', resume)
-    element.addEventListener('wheel', resume, { passive: true })
-    const observer = new ResizeObserver(initialize)
-    observer.observe(element)
-    const viewportObserver = new IntersectionObserver(entries => { inViewport = entries[0]?.isIntersecting ?? true }, { threshold: 0 })
-    viewportObserver.observe(element)
-    if (!reduceMotion) frame = window.requestAnimationFrame(animate)
-    window.addEventListener('resize', initialize)
-    return () => {
-      if (frame) window.cancelAnimationFrame(frame)
-      clearTimeout(resumeTimer)
-      observer.disconnect()
-      viewportObserver.disconnect()
-      window.removeEventListener('resize', initialize)
-      element.removeEventListener('pointerdown', pause)
-      element.removeEventListener('pointerup', resume)
-      element.removeEventListener('pointercancel', resume)
-      element.removeEventListener('mouseenter', pause)
-      element.removeEventListener('mouseleave', resume)
-      element.removeEventListener('touchstart', pause)
-      element.removeEventListener('touchend', resume)
-      element.removeEventListener('wheel', resume)
-    }
-  }, [])
-
-  return <div className="carousel-wrap">
-    <div className="carousel materials-carousel" ref={ref} aria-label="Materiais da coleção">
-      {items.map((item, index) => <article className="material-card" aria-hidden={index < pageContent.materials.items.length || index >= pageContent.materials.items.length * 2} key={index}><span className="material-eyebrow">Material {String((index % pageContent.materials.items.length) + 1).padStart(2, '0')}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}
-    </div>
-  </div>
-}
-
 function MaterialsSection() {
-  return <section className="section"><div className="container"><p className="kicker">{pageContent.materials.kicker}</p><h2>{pageContent.materials.title}</h2><p className="section-intro">{pageContent.materials.subtitle}</p><MaterialsCarousel /><div className="materials-details">{pageContent.materials.details.map(detail => <article className="material-detail" key={detail.title}><h3>{detail.title}</h3><p>{detail.text}</p></article>)}</div><p className="materials-note">{pageContent.materials.note}</p></div></section>
+  return <section className="section"><div className="container"><p className="kicker">{pageContent.materials.kicker}</p><h2>{pageContent.materials.title}</h2><p className="section-intro">{pageContent.materials.subtitle}</p><div className="card-grid card-grid-2">{pageContent.materials.items.map(item => <article className="content-card" key={item.eyebrow}><div className="square-media">{placeholder(item)}</div><span className="eyebrow">🎵 {item.eyebrow}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}</div><div className="materials-details">{pageContent.materials.details.map(detail => <article className="material-detail" key={detail.title}><h3>{detail.title}</h3><p>{detail.text}</p></article>)}</div><p className="materials-note">{pageContent.materials.note}</p></div></section>
 }
 
 function LandingPage() {
