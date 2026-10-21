@@ -1,7 +1,7 @@
 /* LP Teclado 2026 — destaques da hero, fechamento dos resultados e seção de materiais */
 .hero-highlights { display:flex; flex-wrap:wrap; justify-content:center; gap:8px 28px; max-width:860px; margin:4px auto 28px; padding:0; list-style:none }
-.hero-highlights li { display:flex; align-items:center; gap:8px; color:#e6e0d5; font-weight:600 }
-.hero-highlights svg { width:20px; height:20px; flex:none; color:var(--brand-primary-light) }
+.hero-highlights li { display:flex; align-items:center; gap:8px; color:#454038; font-weight:600 }
+.hero-highlights svg { width:20px; height:20px; flex:none; color:var(--brand-primary) }
 .results-closing { max-width:760px; margin:40px auto 0; font-size:18px; text-align:center }
 .materials-carousel { grid-auto-columns:calc((100% - 48px)/3) }
 .material-card { display:flex; flex-direction:column; gap:10px; padding:28px; border:1px solid var(--border-soft); border-radius:16px; background:var(--background-white) }
