@@ -37,14 +37,13 @@ export const pageContent = {
     ],
   },
   bonusesSection: {
-    title: 'Além do produto principal, a Coleção Suprema reúne 4 bônus ainda melhores',
+    title: 'Além do produto principal, a Coleção Suprema reúne 3 bônus ainda melhores',
     subtitle: '',
   },
   bonuses: [
     { src: '/images/bonus-01.webp', alt: 'Imagem do bônus 01', label: 'Imagem do bônus 01', ratio: '1:1' as const, eyebrow: 'Bônus 01', title: 'Harpa Cristã Completa', description: '+400 hinos da Harpa Cristã com cifras simplificadas para teclado.', value: '' },
     { src: '/images/bonus-03.webp', alt: 'Imagem do bônus 02', label: 'Imagem do bônus 02', ratio: '1:1' as const, eyebrow: 'Bônus 02', title: 'Cifras Especiais Corinhos de Fogo', description: 'Seleção especial de corinhos de fogo com cifras, em material digital.', value: '' },
     { src: '', alt: 'Imagem do bônus 03', label: 'Imagem do bônus 03', ratio: '1:1' as const, eyebrow: 'Bônus 03', title: 'Louvores Modernos Simplificados', description: 'Cifras de louvores modernos em versões simplificadas.', value: '' },
-    { src: '', alt: 'Imagem do bônus 04', label: 'Imagem do bônus 04', ratio: '1:1' as const, eyebrow: 'Bônus 04', title: 'Dicionário de Acordes para Teclado', description: 'Referência rápida de acordes para consultar enquanto toca.', value: '' },
   ],
   offersSection: {
     title: 'Escolha a opção ideal para seu repertório',
@@ -67,14 +66,14 @@ export const pageContent = {
         '📖 **Bônus 01:** Harpa Cristã Completa — +400 hinos',
         '🔥 **Bônus 02:** Cifras Especiais Corinhos de Fogo',
         '🎼 **Bônus 03:** Louvores Modernos Simplificados',
-        '🎹 **Bônus 04:** Dicionário de Acordes para Teclado',
+        '🎹 Dicionário de Acordes para Teclado',
         '⚡ Acesso digital imediato após a compra',
       ],
       previousPrice: 'R$ 89,90', installmentCount: 9, installmentValue: 'R$ 5,15', cashValue: 'R$ 37,90', ctaLabel: 'Quero a Coleção Suprema',
     },
     popup: {
       eyebrow: 'Espere! Antes de escolher a opção essencial...',
-      message: 'Por apenas R$ 29,90, você pode levar a Coleção Suprema completa. Se você quer mais opções de cifras gospel, esta é a oportunidade de escolher a versão ampliada por um preço especial. Em vez da oferta essencial de R$ 19,90, você pode levar a Coleção Suprema com 600 cifras organizadas e os quatro bônus complementares.',
+      message: 'Por apenas R$ 29,90, você pode levar a Coleção Suprema completa. Se você quer mais opções de cifras gospel, esta é a oportunidade de escolher a versão ampliada por um preço especial. Em vez da oferta essencial de R$ 19,90, você pode levar a Coleção Suprema com 600 cifras organizadas e os três bônus complementares.',
       title: 'Oferta especial', previousPrice: 'R$ 37,90', installmentCount: 0, installmentValue: '', cashValue: 'R$ 29,90',
       ctaLabel: 'Quero a Coleção Completa por R$ 29,90', secondaryLabel: 'Continuar com a oferta simples',
     },
@@ -89,7 +88,7 @@ export const pageContent = {
   faqSection: { title: 'Ainda está com alguma dúvida?' },
   faq: [
     { question: 'Preciso saber tocar teclado para usar a coleção?', answer: 'A coleção foi pensada para quem já toca teclado e deseja consultar cifras gospel de maneira organizada. Ela não é apresentada como um curso completo de aprendizagem do instrumento.' },
-    { question: 'Qual é a diferença entre a oferta simples e a completa?', answer: 'A oferta simples inclui 150 hinos da Harpa Cristã com cifras simplificadas para teclado e Corinhos de Fogo. A completa inclui 600 cifras organizadas e os quatro bônus descritos na página.' },
+    { question: 'Qual é a diferença entre a oferta simples e a completa?', answer: 'A oferta simples inclui 150 hinos da Harpa Cristã com cifras simplificadas para teclado e Corinhos de Fogo. A completa inclui 600 cifras organizadas e os três bônus descritos na página.' },
     { question: 'Como recebo o acesso após a compra?', answer: 'O acesso é digital e disponibilizado após a confirmação da compra, conforme o procedimento de entrega informado no checkout.' },
     { question: 'Posso consultar as cifras pelo celular?', answer: 'A coleção é digital. Consulte os requisitos e formatos dos arquivos informados no checkout para confirmar a compatibilidade com seu dispositivo.' },
     { question: 'E se eu comprar e não gostar?', answer: 'Você terá 7 dias de garantia para avaliar o produto e solicitar o reembolso dentro do prazo, conforme as condições informadas na compra.' },
