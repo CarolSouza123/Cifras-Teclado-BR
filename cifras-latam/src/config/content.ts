@@ -35,13 +35,6 @@ export const pageContent = {
       { src: '', alt: 'Imagem do material 01', label: 'Material 01', ratio: '1:1' as const, eyebrow: 'Material 01', title: 'Harpa Cristã Essencial', description: '150 hinos da Harpa Cristã com cifras simplificadas para teclado, reunidos em uma coleção digital.' },
       { src: '', alt: 'Imagem do material 02', label: 'Material 02', ratio: '1:1' as const, eyebrow: 'Material 02', title: 'Corinhos de Fogo', description: 'Corinhos de fogo em material digital, para consultar e tocar nos seus momentos de louvor.' },
     ],
-    details: [
-      { title: 'Harpa Cristã Simplificada', text: 'Uma coleção de hinos tradicionais para tecladistas que desejam consultar suas cifras durante os momentos de louvor.' },
-      { title: 'Coleção de cifras gospel', text: 'Um repertório digital organizado para facilitar a busca e a consulta das músicas.' },
-      { title: 'Louvores modernos simplificados', text: 'Uma seleção complementar de louvores gospel para ampliar as opções de repertório.' },
-    ],
-    note: 'Importante: os materiais e as quantidades variam conforme a oferta escolhida. Confira os itens de cada pacote antes de finalizar a compra.',
-  },
   bonusesSection: {
     title: 'E a Coleção Suprema ainda inclui 4 bônus especiais',
     subtitle: 'Além do produto principal, a oferta completa reúne materiais complementares para ampliar suas opções de consulta e repertório.',
