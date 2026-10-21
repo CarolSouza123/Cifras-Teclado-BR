@@ -37,8 +37,8 @@ export const pageContent = {
     ],
   },
   bonusesSection: {
-    title: 'E a Coleção Suprema ainda inclui 4 bônus especiais',
-    subtitle: 'Além do produto principal, a Coleção Suprema reúne 4 bônus ainda melhores.',
+    title: 'Além do produto principal, a Coleção Suprema reúne 4 bônus ainda melhores',
+    subtitle: '',
   },
   bonuses: [
     { src: '/images/bonus-01.webp', alt: 'Imagem do bônus 01', label: 'Imagem do bônus 01', ratio: '1:1' as const, eyebrow: 'Bônus 01', title: 'Harpa Cristã Completa', description: '+400 hinos da Harpa Cristã com cifras simplificadas para teclado.', value: '' },
