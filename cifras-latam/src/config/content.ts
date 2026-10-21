@@ -9,8 +9,8 @@ export const pageContent = {
   hero: {
     image: '/images/imagem-hero.webp',
     imageAlt: 'Coleção Suprema Gospel para Teclado: coleção digital de cifras',
-    headline: 'Tenha 600 cifras gospel organizadas para teclado e encontre seus louvores com mais praticidade',
-    body: 'Uma coleção digital para tecladistas que já tocam e querem ter hinos tradicionais e louvores gospel à disposição, sem precisar procurar cada cifra separadamente.',
+    headline: '+600 cifras gospel de teclado, organizadas em PDFs limpos, para tocar ainda hoje.',
+    body: 'Para quem já toca e quer ter hinos tradicionais e modernos à disposição, sem precisar procurar cada cifra separadamente.',
     highlights: ['Cifras organizadas para facilitar sua consulta.', 'Repertório gospel para seus momentos de louvor.', 'Acesso digital imediato após a compra.'],
     ctaLabel: 'Quero conhecer a coleção',
     securityImage: '/images/selos-seguranca-compra.svg',
