@@ -40,7 +40,7 @@ function UrgencyBar() {
   }, [])
 
   if (!pageContent.urgencyBar.enabled) return null
-  return <div className="urgency">{pageContent.urgencyBar.text} {localDate}</div>
+  return <div className="urgency">{pageContent.urgencyBar.text} {localDate}⚡</div>
 }
 
 function Price({ data }: { data: { previousPrice: string; installmentCount: number; installmentValue: string; cashValue: string } }) {
