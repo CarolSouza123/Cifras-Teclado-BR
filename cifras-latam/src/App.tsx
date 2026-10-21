@@ -6,6 +6,7 @@ import { seo } from './config/seo'
 import { theme } from './config/theme'
 import { withAttributionParams } from './utils/attribution'
 import { trackEvent, trackPageview } from './utils/track'
+import './styles/lp2026.css'
 
 const AdminPage = lazy(() => import('./admin/Admin'))
 
@@ -44,10 +45,11 @@ function UrgencyBar() {
 
 function Price({ data }: { data: { previousPrice: string; installmentCount: number; installmentValue: string; cashValue: string } }) {
   const ready = data.previousPrice || data.installmentValue || data.cashValue
+  const hasInstallment = Boolean(data.installmentCount && data.installmentValue)
   return <div className="price" aria-label={ready ? 'Preço da oferta' : 'Preço a definir'}>
-    <span className="price-before"><s>{data.previousPrice ? `De ${data.previousPrice}` : 'Preço anterior a definir'}</s> por apenas</span>
-    <strong>{data.installmentCount && data.installmentValue ? `${data.installmentCount}x de ${data.installmentValue}` : 'Preço a definir'}</strong>
-    <span>ou <b>{data.cashValue || 'valor a definir'}</b> à vista no PIX</span>
+    {data.previousPrice ? <span className="price-before"><s>{`De ${data.previousPrice}`}</s> por apenas</span> : <span className="price-before">por apenas</span>}
+    <strong>{hasInstallment ? `${data.installmentCount}x de ${data.installmentValue}` : (data.cashValue || 'Preço a definir')}</strong>
+    {hasInstallment ? <span>ou <b>{data.cashValue || 'valor a definir'}</b> à vista no PIX</span> : <span>à vista no PIX</span>}
   </div>
 }
 
@@ -141,7 +143,7 @@ function UpgradeModal({ open, onClose }: { open: boolean; onClose: () => void })
       <button ref={closeButton} className="close" onClick={onClose} aria-label="Fechar"><X /></button>
       <span className="eyebrow">{pageContent.offers.popup.eyebrow}</span><p>{pageContent.offers.popup.message}</p><h2 id="modal-title">{pageContent.offers.popup.title}</h2>
       <FeatureList items={pageContent.offers.complete.items} /><Price data={pageContent.offers.popup} />
-      <Button href={links.checkoutUpgrade ? withAttributionParams(links.checkoutUpgrade) : undefined} onClick={() => trackEvent('checkout_click', { plan: 'completa', source: 'modal' })}>{pageContent.offers.popup.ctaLabel}</Button>
+      <Button href={(links.checkoutSpecial || links.checkoutUpgrade) ? withAttributionParams(links.checkoutSpecial || links.checkoutUpgrade) : undefined} onClick={() => trackEvent('checkout_click', { plan: 'completa', source: 'modal' })}>{pageContent.offers.popup.ctaLabel}</Button>
       <Button kind="secondary" onClick={() => { trackEvent('checkout_click', { plan: 'simples', source: 'modal' }); onClose(); if (links.checkoutSimple) window.location.href = withAttributionParams(links.checkoutSimple) }}>{pageContent.offers.popup.secondaryLabel}</Button>
     </div>
   </div>
@@ -158,15 +160,73 @@ const FeatureList = ({ items }: { items: readonly FeatureItem[] }) => <ul classN
   return <li key={label}>{!hasEmoji && <Check aria-hidden="true" />}<span>{renderLabel(label)}{value && <> <s className="bonus-value">{value}</s></>}</span></li>
 })}</ul>
 
-function PitchSection({ index }: { index: number }) {
-  const block = pageContent.about[index]
-  if (!block) return null
-  if ('highlights' in block && block.highlights) return <section className="section"><div className="container"><div className="download-card"><h2>{block.title}</h2>{block.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}<ul className="highlight-row">{block.highlights.map(item => <li key={item}><Check aria-hidden="true" />{item}</li>)}</ul></div></div></section>
-  return <section className="section"><div className="container guarantee"><div><h2>{block.title}</h2>{block.paragraphs.map(paragraph => <p key={paragraph}>{renderLabel(paragraph)}</p>)}</div></div></section>
+function MaterialsCarousel() {
+  const ref = useRef<HTMLDivElement>(null)
+  const items = [...pageContent.materials.items, ...pageContent.materials.items, ...pageContent.materials.items]
+  const segmentWidth = () => (ref.current?.scrollWidth ?? 0) / 3
+
+  useEffect(() => {
+    const element = ref.current
+    if (!element) return
+    const initialize = () => element.scrollTo({ left: segmentWidth() })
+    initialize()
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    let frame = 0
+    let previousTime = performance.now()
+    let paused = false
+    let inViewport = true
+    let resumeTimer: ReturnType<typeof setTimeout>
+    const pause = () => { paused = true; clearTimeout(resumeTimer) }
+    const resume = () => { clearTimeout(resumeTimer); resumeTimer = setTimeout(() => { paused = false }, 2500) }
+    const animate = (time: number) => {
+      const segment = segmentWidth()
+      if (segment && !paused && inViewport) {
+        element.scrollLeft += ((time - previousTime) / 1000) * 75
+        if (element.scrollLeft >= segment * 2) element.scrollLeft -= segment
+      }
+      previousTime = time
+      frame = window.requestAnimationFrame(animate)
+    }
+    element.addEventListener('pointerdown', pause)
+    element.addEventListener('pointerup', resume)
+    element.addEventListener('pointercancel', resume)
+    element.addEventListener('mouseenter', pause)
+    element.addEventListener('mouseleave', resume)
+    element.addEventListener('touchstart', pause, { passive: true })
+    element.addEventListener('touchend', resume)
+    element.addEventListener('wheel', resume, { passive: true })
+    const observer = new ResizeObserver(initialize)
+    observer.observe(element)
+    const viewportObserver = new IntersectionObserver(entries => { inViewport = entries[0]?.isIntersecting ?? true }, { threshold: 0 })
+    viewportObserver.observe(element)
+    if (!reduceMotion) frame = window.requestAnimationFrame(animate)
+    window.addEventListener('resize', initialize)
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame)
+      clearTimeout(resumeTimer)
+      observer.disconnect()
+      viewportObserver.disconnect()
+      window.removeEventListener('resize', initialize)
+      element.removeEventListener('pointerdown', pause)
+      element.removeEventListener('pointerup', resume)
+      element.removeEventListener('pointercancel', resume)
+      element.removeEventListener('mouseenter', pause)
+      element.removeEventListener('mouseleave', resume)
+      element.removeEventListener('touchstart', pause)
+      element.removeEventListener('touchend', resume)
+      element.removeEventListener('wheel', resume)
+    }
+  }, [])
+
+  return <div className="carousel-wrap">
+    <div className="carousel materials-carousel" ref={ref} aria-label="Materiais da coleção">
+      {items.map((item, index) => <article className="material-card" aria-hidden={index < pageContent.materials.items.length || index >= pageContent.materials.items.length * 2} key={index}><span className="material-eyebrow">Material {String((index % pageContent.materials.items.length) + 1).padStart(2, '0')}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}
+    </div>
+  </div>
 }
 
-function SampleSection() {
-  return <section className="section"><div className="container"><div className="sample-card"><div className="sample-text"><span className="sample-eyebrow">{pageContent.sampleSection.eyebrow}</span><h2>{pageContent.sampleSection.title} <span>{pageContent.sampleSection.titleHighlight}</span></h2><p className="sample-body">{pageContent.sampleSection.body}</p><p>{pageContent.sampleSection.note}</p><Button kind="secondary" href={links.samplePdf} download onClick={() => trackEvent('sample_click')}>{pageContent.sampleSection.ctaLabel}</Button></div><div className="sample-media">{pageContent.sampleSection.image ? <img src={pageContent.sampleSection.image} alt={pageContent.sampleSection.imageAlt} loading="lazy" decoding="async" /> : <div className="placeholder" role="img" aria-label={pageContent.sampleSection.imageAlt}><span>Cifra gospel de exemplo</span><small>900 × 1200 • 3:4</small></div>}</div></div></div></section>
+function MaterialsSection() {
+  return <section className="section"><div className="container"><p className="kicker">{pageContent.materials.kicker}</p><h2>{pageContent.materials.title}</h2><p className="section-intro">{pageContent.materials.subtitle}</p><MaterialsCarousel /><div className="materials-details">{pageContent.materials.details.map(detail => <article className="material-detail" key={detail.title}><h3>{detail.title}</h3><p>{detail.text}</p></article>)}</div><p className="materials-note">{pageContent.materials.note}</p></div></section>
 }
 
 function LandingPage() {
@@ -196,12 +256,10 @@ function LandingPage() {
   return <>
     <UrgencyBar />
     <main>
-      <section className="hero"><div className="container hero-inner"><div className="hero-media">{placeholder({ src: pageContent.hero.image, alt: pageContent.hero.imageAlt, label: 'Imagem da Hero', ratio: '3:2' }, true)}</div><h1>{pageContent.hero.headline}</h1><p className="lead">{pageContent.hero.body}</p><div className="hero-action"><Button onClick={() => document.getElementById('ofertas')?.scrollIntoView({ behavior: 'smooth' })}>{pageContent.hero.ctaLabel}</Button><img src={pageContent.hero.securityImage} alt={pageContent.hero.securityImageAlt} width={525} height={44} decoding="async" /></div></div></section>
-      <PitchSection index={0} />
-      <SampleSection />
-      <section className="section section-muted"><div className="container"><h2>{pageContent.results.title}<span className="title-line2">{pageContent.results.subtitle}</span></h2><Carousel /></div></section>
-      <PitchSection index={1} />
-      <section className="section section-muted"><div className="container"><h2>{pageContent.bonusesSection.title}</h2><div className="card-grid">{pageContent.bonuses.map(item => <article className="content-card bonus" key={item.eyebrow}><div className="square-media">{placeholder(item)}</div><span className="eyebrow">🎁 {item.eyebrow}: incluso na oferta completa</span><h3>{item.title}</h3><p>{item.description}</p>{item.value && <s>{item.value}</s>}</article>)}</div></div></section>
+      <section className="hero"><div className="container hero-inner"><div className="hero-media">{placeholder({ src: pageContent.hero.image, alt: pageContent.hero.imageAlt, label: 'Imagem da Hero', ratio: '3:2' }, true)}</div><h1>{pageContent.hero.headline}</h1><p className="lead">{pageContent.hero.body}</p><ul className="hero-highlights">{pageContent.hero.highlights.map(item => <li key={item}><Check aria-hidden="true" />{item}</li>)}</ul><div className="hero-action"><Button onClick={() => document.getElementById('ofertas')?.scrollIntoView({ behavior: 'smooth' })}>{pageContent.hero.ctaLabel}</Button><img src={pageContent.hero.securityImage} alt={pageContent.hero.securityImageAlt} width={525} height={44} decoding="async" /></div></div></section>
+      <section className="section section-muted"><div className="container"><h2>{pageContent.results.title}<span className="title-line2">{pageContent.results.subtitle}</span></h2><Carousel /><p className="results-closing">{pageContent.results.closing}</p></div></section>
+      <MaterialsSection />
+      <section className="section section-muted"><div className="container"><h2>{pageContent.bonusesSection.title}</h2><p className="section-intro">{pageContent.bonusesSection.subtitle}</p><div className="card-grid">{pageContent.bonuses.map(item => <article className="content-card bonus" key={item.eyebrow}><div className="square-media">{placeholder(item)}</div><span className="eyebrow">🎁 {item.eyebrow}: incluso na oferta completa</span><h3>{item.title}</h3><p>{item.description}</p>{item.value && <s>{item.value}</s>}</article>)}</div></div></section>
       <section className="section" id="ofertas"><div className="container"><h2>{pageContent.offersSection.title}</h2><p className="section-intro">{pageContent.offersSection.subtitle}</p><div className="offers">
         <article className="offer-card"><h3>{pageContent.offers.simple.title}</h3><p className="offer-subtitle">{pageContent.offers.simple.subtitle}</p><FeatureList items={pageContent.offers.simple.items} /><Price data={pageContent.offers.simple} /><div className="offer-action"><Button kind="secondary" onClick={() => setModalOpen(true)}>{pageContent.offers.simple.ctaLabel}</Button><img src={pageContent.offersSection.paymentSecurityImage} alt={pageContent.offersSection.paymentSecurityAlt} loading="lazy" decoding="async" width={554} height={119} /></div></article>
         <article className="offer-card featured"><span className="offer-badge">{pageContent.offers.complete.badge}</span><h3>{pageContent.offers.complete.title}</h3><p className="offer-subtitle">{pageContent.offers.complete.subtitle}</p><FeatureList items={pageContent.offers.complete.items} /><Price data={pageContent.offers.complete} /><div className="offer-action"><Button href={links.checkoutComplete ? withAttributionParams(links.checkoutComplete) : undefined} onClick={() => trackEvent('checkout_click', { plan: 'completa', source: 'card' })}>{pageContent.offers.complete.ctaLabel}</Button><img src={pageContent.offersSection.paymentSecurityImage} alt={pageContent.offersSection.paymentSecurityAlt} loading="lazy" decoding="async" width={554} height={119} /></div></article>
