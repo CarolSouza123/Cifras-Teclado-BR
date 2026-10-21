@@ -12,7 +12,7 @@ export const pageContent = {
     headline: '+600 cifras gospel de teclado, organizadas em PDFs limpos, para tocar ainda hoje.',
     body: 'Para quem já toca e quer ter hinos tradicionais e modernos à disposição, sem precisar procurar cada cifra separadamente.',
     highlights: ['Cifras organizadas para facilitar sua consulta.', 'Repertório gospel para seus momentos de louvor.', 'Acesso digital imediato após a compra.'],
-    ctaLabel: 'Quero conhecer a coleção',
+    ctaLabel: 'Quero tocar hoje',
     securityImage: '/images/selos-seguranca-compra.svg',
     securityImageAlt: 'Selos de compra segura, satisfação garantida e privacidade protegida',
   },
