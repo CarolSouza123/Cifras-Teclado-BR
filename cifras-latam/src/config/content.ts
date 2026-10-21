@@ -17,9 +17,9 @@ export const pageContent = {
     securityImageAlt: 'Selos de compra segura, satisfação garantida e privacidade protegida',
   },
   results: {
-    title: 'Mais praticidade para encontrar suas cifras gospel',
-    subtitle: 'Veja os feedbacks reais de quem já teve contato com a Coleção Suprema Gospel.',
-    closing: 'Sua próxima cifra pode estar muito mais fácil de encontrar quando seu repertório está organizado em uma coleção feita para seus momentos de louvor.',
+    title: 'Veja os feedbacks reais de quem usa a Coleção Suprema Gospel',
+    subtitle: '',
+    closing: '',
     items: Array.from({ length: 6 }, (_, index) => ({
       src: `/images/depoimento-${String(index + 1).padStart(2, '0')}.webp`,
       alt: `Feedback ${String(index + 1).padStart(2, '0')}`,
