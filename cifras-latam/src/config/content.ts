@@ -29,8 +29,8 @@ export const pageContent = {
   },
   materials: {
     kicker: 'O que você recebe',
-    title: 'Seu repertório gospel reunido em um só lugar',
-    subtitle: 'Tenha acesso aos materiais digitais incluídos na oferta escolhida e consulte suas cifras com mais praticidade.',
+    title: 'Seu repertório gospel simplificado reunido em um só lugar',
+    subtitle: '',
     items: [
       { src: '/images/material01.webp', alt: 'Imagem do material 01', label: 'Material 01', ratio: '1:1' as const, eyebrow: 'Material 01', title: 'Harpa Cristã Essencial', description: '150 hinos da Harpa Cristã com cifras simplificadas para teclado, reunidos em uma coleção digital.' },
       { src: '/images/material02.webp', alt: 'Imagem do material 02', label: 'Material 02', ratio: '1:1' as const, eyebrow: 'Material 02', title: 'Corinhos de Fogo', description: 'Corinhos de fogo em material digital, para consultar e tocar nos seus momentos de louvor.' },
