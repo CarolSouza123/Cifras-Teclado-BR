@@ -42,8 +42,8 @@ export const pageContent = {
   },
   bonuses: [
     { src: '/images/bonus-01.webp', alt: 'Imagem do bônus 01', label: 'Imagem do bônus 01', ratio: '1:1' as const, eyebrow: 'Bônus 01', title: 'Harpa Cristã Completa', description: '+400 hinos da Harpa Cristã com cifras simplificadas para teclado.', value: '' },
-    { src: '/images/bonus-03.webp', alt: 'Imagem do bônus 02', label: 'Imagem do bônus 02', ratio: '1:1' as const, eyebrow: 'Bônus 02', title: 'Cifras Especiais Corinhos de Fogo', description: 'Seleção especial de corinhos de fogo com cifras, em material digital.', value: '' },
-    { src: '', alt: 'Imagem do bônus 03', label: 'Imagem do bônus 03', ratio: '1:1' as const, eyebrow: 'Bônus 03', title: 'Louvores Modernos Simplificados', description: 'Cifras de louvores modernos em versões simplificadas.', value: '' },
+    { src: '', alt: 'Imagem do bônus 02', label: 'Imagem do bônus 02', ratio: '1:1' as const, eyebrow: 'Bônus 02', title: 'Louvores Modernos Simplificados', description: 'Cifras de louvores modernos em versões simplificadas.', value: '' },
+    { src: '', alt: 'Imagem do bônus 03', label: 'Imagem do bônus 03', ratio: '1:1' as const, eyebrow: 'Bônus 03', title: 'Dicionário de Acordes para Teclado', description: 'Referência rápida de acordes para consultar enquanto toca.', value: '' },
   ],
   offersSection: {
     title: 'Escolha a opção ideal para seu repertório',
@@ -64,9 +64,8 @@ export const pageContent = {
       items: [
         '🎵 **+600 cifras organizadas**',
         '📖 **Bônus 01:** Harpa Cristã Completa — +400 hinos',
-        '🔥 **Bônus 02:** Cifras Especiais Corinhos de Fogo',
-        '🎼 **Bônus 03:** Louvores Modernos Simplificados',
-        '🎹 Dicionário de Acordes para Teclado',
+        '🎼 **Bônus 02:** Louvores Modernos Simplificados',
+        '🎹 **Bônus 03:** Dicionário de Acordes para Teclado',
         '⚡ Acesso digital imediato após a compra',
       ],
       previousPrice: 'R$ 89,90', installmentCount: 9, installmentValue: 'R$ 5,15', cashValue: 'R$ 37,90', ctaLabel: 'Quero a Coleção Suprema',
