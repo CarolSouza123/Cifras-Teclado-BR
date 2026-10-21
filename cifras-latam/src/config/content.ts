@@ -4,7 +4,7 @@ export type ProductItem = MediaItem & { eyebrow: string; title: string; descript
 export const pageContent = {
   urgencyBar: {
     enabled: true,
-    text: '⚡ ATENÇÃO: de R$ 49,90 por apenas R$ 19,90 ⚡ válido até',
+    text: '⚡ ATENÇÃO: válido',
   },
   hero: {
     image: '/images/imagem-hero.webp',
