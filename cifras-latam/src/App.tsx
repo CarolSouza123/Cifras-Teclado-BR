@@ -161,7 +161,7 @@ const FeatureList = ({ items }: { items: readonly FeatureItem[] }) => <ul classN
 })}</ul>
 
 function MaterialsSection() {
-  return <section className="section"><div className="container"><p className="kicker">{pageContent.materials.kicker}</p><h2>{pageContent.materials.title}</h2><p className="section-intro">{pageContent.materials.subtitle}</p><div className="card-grid card-grid-2">{pageContent.materials.items.map(item => <article className="content-card" key={item.eyebrow}><div className="square-media">{placeholder(item)}</div><span className="eyebrow">🎵 {item.eyebrow}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}</div></div></section>
+  return <section className="section section-light"><div className="container"><p className="kicker">{pageContent.materials.kicker}</p><h2>{pageContent.materials.title}</h2><p className="section-intro">{pageContent.materials.subtitle}</p><div className="card-grid card-grid-2">{pageContent.materials.items.map(item => <article className="content-card" key={item.eyebrow}><div className="square-media">{placeholder(item)}</div><span className="eyebrow">🎵 {item.eyebrow}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}</div></div></section>
 }
 
 function LandingPage() {
