@@ -35,15 +35,16 @@ export const pageContent = {
       { src: '', alt: 'Imagem do material 01', label: 'Material 01', ratio: '1:1' as const, eyebrow: 'Material 01', title: 'Harpa Cristã Essencial', description: '150 hinos da Harpa Cristã com cifras simplificadas para teclado, reunidos em uma coleção digital.' },
       { src: '', alt: 'Imagem do material 02', label: 'Material 02', ratio: '1:1' as const, eyebrow: 'Material 02', title: 'Corinhos de Fogo', description: 'Corinhos de fogo em material digital, para consultar e tocar nos seus momentos de louvor.' },
     ],
+  },
   bonusesSection: {
     title: 'E a Coleção Suprema ainda inclui 4 bônus especiais',
     subtitle: 'Além do produto principal, a oferta completa reúne materiais complementares para ampliar suas opções de consulta e repertório.',
   },
   bonuses: [
-    { src: '/images/bonus-01.webp', alt: 'Imagem do bônus 01', label: 'Imagem do bônus 01', ratio: '1:1' as const, eyebrow: 'Bônus 01', title: 'Harpa Cristã Completa', description: '+400 hinos tradicionais com cifras simplificadas para teclado, em um material complementar dedicado à Harpa Cristã, incluído na oferta completa.', value: '' },
-    { src: '/images/bonus-03.webp', alt: 'Imagem do bônus 02', label: 'Imagem do bônus 02', ratio: '1:1' as const, eyebrow: 'Bônus 02', title: 'Cifras Especiais Corinhos de Fogo', description: 'Uma seleção especial de corinhos de fogo com cifras, reunida em material digital para seus momentos de louvor.', value: '' },
-    { src: '', alt: 'Imagem do bônus 03', label: 'Imagem do bônus 03', ratio: '1:1' as const, eyebrow: 'Bônus 03', title: 'Louvores Modernos Simplificados', description: 'Consulte cifras de louvores gospel modernos e conhecidos. Uma seleção complementar de louvores em versões simplificadas, para você ter mais opções de repertório.', value: '' },
-    { src: '', alt: 'Imagem do bônus 04', label: 'Imagem do bônus 04', ratio: '1:1' as const, eyebrow: 'Bônus 04', title: 'Dicionário de Acordes para Teclado', description: 'Consulte referências de acordes enquanto toca. Um material de apoio para facilitar a consulta de acordes no teclado, sem precisar procurar cada referência separadamente.', value: '' },
+    { src: '/images/bonus-01.webp', alt: 'Imagem do bônus 01', label: 'Imagem do bônus 01', ratio: '1:1' as const, eyebrow: 'Bônus 01', title: 'Harpa Cristã Completa', description: '+400 hinos da Harpa Cristã com cifras simplificadas para teclado.', value: '' },
+    { src: '/images/bonus-03.webp', alt: 'Imagem do bônus 02', label: 'Imagem do bônus 02', ratio: '1:1' as const, eyebrow: 'Bônus 02', title: 'Cifras Especiais Corinhos de Fogo', description: 'Seleção especial de corinhos de fogo com cifras, em material digital.', value: '' },
+    { src: '', alt: 'Imagem do bônus 03', label: 'Imagem do bônus 03', ratio: '1:1' as const, eyebrow: 'Bônus 03', title: 'Louvores Modernos Simplificados', description: 'Cifras de louvores modernos em versões simplificadas.', value: '' },
+    { src: '', alt: 'Imagem do bônus 04', label: 'Imagem do bônus 04', ratio: '1:1' as const, eyebrow: 'Bônus 04', title: 'Dicionário de Acordes para Teclado', description: 'Referência rápida de acordes para consultar enquanto toca.', value: '' },
   ],
   offersSection: {
     title: 'Escolha a opção ideal para seu repertório',
