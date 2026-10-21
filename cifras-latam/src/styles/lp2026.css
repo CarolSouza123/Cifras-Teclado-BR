@@ -30,3 +30,7 @@
 .offer-card:not(.featured) .button { background:#fff; color:#151412; border-color:#fff; box-shadow:0 10px 24px rgba(0,0,0,.35); animation:none }
 footer { background:var(--background-white); color:var(--text-body) }
 footer strong { color:var(--text-title) }
+
+/* Hero: a caixa acompanha a foto, sem faixa vazia */
+.hero-media { aspect-ratio:auto }
+.hero-media img { height:auto }
