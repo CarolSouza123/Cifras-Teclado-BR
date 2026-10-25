@@ -11,13 +11,13 @@ export const pageContent = {
     imageAlt: 'Coleção Suprema Gospel para Teclado: coleção digital de cifras',
     headline: '+600 cifras gospel de teclado, organizadas em PDFs limpos, para tocar ainda hoje.',
     body: 'Para quem já toca e quer ter hinos tradicionais e modernos à disposição, sem precisar procurar cada cifra separadamente.',
-    highlights: ['Cifras organizadas para facilitar sua consulta.', 'Acesso digital imediato após a compra.'],
+    highlights: [],
     ctaLabel: 'Quero tocar hoje',
     securityImage: '/images/selos-seguranca-compra.svg',
     securityImageAlt: 'Selos de compra segura, satisfação garantida e privacidade protegida',
   },
   results: {
-    title: 'Veja os feedbacks reais de quem usa a Coleção Suprema Gospel',
+    title: 'Veja os feedbacks de quem usa a Coleção Suprema Gospel',
     subtitle: '',
     closing: '',
     items: Array.from({ length: 6 }, (_, index) => ({
@@ -29,7 +29,7 @@ export const pageContent = {
   },
   materials: {
     kicker: 'O que você recebe',
-    title: 'Seu repertório gospel simplificado reunido em um só lugar',
+    title: 'Seu repertório gospel simplificado reunido em um só lugar',
     subtitle: '',
     items: [
       { src: '/images/material01.webp', alt: 'Imagem do material 01', label: 'Material 01', ratio: '1:1' as const, eyebrow: 'Material 01', title: 'Harpa Cristã Essencial', description: '150 hinos da Harpa Cristã com cifras simplificadas para teclado, reunidos em uma coleção digital.' },
@@ -55,7 +55,7 @@ export const pageContent = {
     simple: {
       title: '🎹 Cifras Essencial',
       subtitle: 'Para quem prefere hinos tradicionais.',
-      items: ['🎵 150 hinos da Harpa Cristã com cifras simplificadas para teclado', '🎵 Corinhos de Fogo', '📱 Materiais digitais incluídos no pacote'],
+      items: ['🎵 150 hinos da Harpa Cristã com cifras simplificadas para teclado', '🎵 Corinhos de Fogo', '📱 Materiais digitais incluídos no pacote'],
       previousPrice: 'R$ 49,90', installmentCount: 4, installmentValue: 'R$ 5,63', cashValue: 'R$ 19,90', ctaLabel: 'Quero a Harpa Cristã Essencial',
     },
     complete: {
@@ -64,16 +64,16 @@ export const pageContent = {
       items: [
         '🎵 **+600 cifras organizadas**',
         '🔥 Especiais Corinhos de Fogo',
-        '📖 **Bônus 01:** Harpa Cristã Completa +400 hinos',
-        '🎼 **Bônus 02:** Louvores Modernos Simplificados',
-        '🎹 **Bônus 03:** Dicionário de Acordes para Teclado',
+        '📖 **Bônus 01:** Harpa Cristã Completa +400 hinos',
+        '🎼 **Bônus 02:** Louvores Modernos Simplificados',
+        '🎹 **Bônus 03:** Dicionário de Acordes para Teclado',
         '⚡ Acesso digital imediato após a compra',
       ],
       previousPrice: 'R$ 89,90', installmentCount: 9, installmentValue: 'R$ 5,15', cashValue: 'R$ 37,90', ctaLabel: 'Quero a Coleção Suprema',
     },
     popup: {
-      eyebrow: 'Espere! Antes de escolher a opção essencial...',
-      message: 'Por apenas R$ 29,90, você pode levar a Coleção Suprema completa. Se você quer mais opções de cifras gospel, esta é a oportunidade de escolher a versão ampliada por um preço especial. Em vez da oferta essencial de R$ 19,90, você pode levar a Coleção Suprema com 600 cifras organizadas e os três bônus complementares.',
+      eyebrow: 'Espere!',
+      message: 'Por apenas R$ 29,90, leve a Coleção Suprema completa: 600 cifras organizadas e os três bônus complementares.',
       title: 'Oferta especial', previousPrice: 'R$ 37,90', installmentCount: 0, installmentValue: '', cashValue: 'R$ 29,90',
       ctaLabel: 'Quero a Coleção Completa por R$ 29,90', secondaryLabel: 'Continuar com a oferta simples',
     },
