@@ -27,7 +27,7 @@
 /* Ajustes de 21/10: hero, pagamentos, botao simples, rodape */
 .hero h1 { margin-top:26px }
 .offer-card .offer-action img { background:transparent; filter:invert(1) grayscale(1) brightness(1.35) contrast(1.05) }
-.offer-card:not(.featured) .button { background:transparent; color:var(--brand-primary-light); border:2px solid var(--brand-primary-light); box-shadow:none; animation:none; font-size:17px; padding:16px 24px }
+.offer-card:not(.featured) .button { background:var(--brand-primary); color:#fff; border:2px solid var(--brand-primary); box-shadow:none; animation:none; font-size:17px; padding:16px 24px }
 
 /* Hero: a caixa acompanha a foto, sem faixa vazia */
 .hero .hero-media { aspect-ratio:auto }
@@ -38,3 +38,8 @@
 .modal .button { font-size:17px; padding:16px 24px }
 .section-light .faq-item>button { color:var(--text-on-dark) }
 .guarantee-seal { background:#fffdf9; border-radius:50%; padding:12px; box-shadow:0 10px 30px rgba(0,0,0,.35) }
+
+/* Leva 31/10: cartão simples com fonte clara sobre o fundo escuro (a seção clara estava escurecendo o texto) */
+.offer-card:not(.featured) { color:var(--text-body) }
+.offer-card:not(.featured) h3 { color:var(--text-title) }
+.offer-card:not(.featured) .offer-subtitle, .offer-card:not(.featured) .price, .offer-card:not(.featured) .price-before { color:var(--text-body) }
